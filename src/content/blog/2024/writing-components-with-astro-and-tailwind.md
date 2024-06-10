@@ -1,6 +1,6 @@
 ---
 title: Writing components in Astro with Tailwind & variants
-preface: test
+preface: Learn how to write clean and reusable componets with Astro, Tailwind & tailwind-variants
 tags: ["astro", "tailwind"]
 date: 2024-06-10
 ---
