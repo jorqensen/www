@@ -1,0 +1,25 @@
+---
+import { getCollection } from "astro:content";
+import ApplicationLayout from "~/layouts/ApplicationLayout.astro";
+
+const blog = await getCollection("blog");
+const tags = [...new Set(blog.map((post) => post.data.tags).flat())];
+---
+
+<ApplicationLayout title="tags">
+    <main class="grid space-y-8">
+        <h1 class="text-3xl font-semibold tracking-tight">Tags</h1>
+        <div class="flex space-x-2">
+            {
+                tags.map((tag) => (
+                    <a
+                        href={`/tags/${tag}`}
+                        class="transition-colors hover:text-teal-500"
+                    >
+                        #{tag}
+                    </a>
+                ))
+            }
+        </div>
+    </main>
+</ApplicationLayout>

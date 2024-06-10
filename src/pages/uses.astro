@@ -1,0 +1,30 @@
+---
+import Using from "~/components/Using.astro";
+import UsingSection from "~/components/UsingSection.astro";
+import ApplicationLayout from "~/layouts/ApplicationLayout.astro";
+---
+
+<ApplicationLayout title="Uses">
+    <main class="grid space-y-8">
+        <UsingSection title="Hardware">
+            <Using title="Keyboard"> Logitech MX Keys (US Layout) </Using>
+            <Using title="Mouse"> Logitech MX Master 3S </Using>
+            <Using title="Headphones"> HyperX Cloud Earbuds </Using>
+            <Using title="Microphone"> Blue Baby Bottle </Using>
+            <Using title="Mixer"> GoXLR Mini </Using>
+            <Using title="Phone"> Pixel 7 Pro w/ Niagara Launcher </Using>
+        </UsingSection>
+
+        <UsingSection title="Editor">
+            <Using title="IDE"> Visual Studio Code </Using>
+            <Using title="Color Scheme"> Poimandres / Bearded Theme </Using>
+            <Using title="Font"> Cascadia Code / JetBrains Mono </Using>
+        </UsingSection>
+
+        <UsingSection title="Software">
+            <Using title="Browser"> Google Chrome / Firefox </Using>
+            <Using title="Database GUI"> TablePlus </Using>
+            <Using title="API Client"> Postman / Bruno </Using>
+        </UsingSection>
+    </main>
+</ApplicationLayout>

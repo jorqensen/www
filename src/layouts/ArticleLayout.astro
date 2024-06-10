@@ -1,0 +1,89 @@
+---
+import "@fontsource-variable/inter";
+import { ViewTransitions } from "astro:transitions";
+import Navigation from "~/components/Navigation.astro";
+
+interface Props {
+    title: string;
+    published: Date;
+}
+
+const { title, published } = Astro.props;
+const faviconUrl = new URL("/favicon.ico", Astro.url);
+---
+
+<html
+    lang="en"
+    class="min-h-screen bg-neutral-950 bg-paper font-inter text-neutral-300 antialiased"
+    transition:animate="fade"
+>
+    <head>
+        <meta charset="utf-8" />
+        <link
+            rel="icon"
+            type="image/ico"
+            href={faviconUrl}
+        />
+        <meta
+            name="viewport"
+            content="width=device-width"
+        />
+        <meta
+            name="generator"
+            content={Astro.generator}
+        />
+
+        <link
+            rel="manifest"
+            href="/manifest.json"
+        />
+
+        <!-- Open Graph -->
+        <meta
+            name="og:title"
+            content={title}
+        />
+        <meta
+            name="og:image"
+            content={faviconUrl}
+        />
+        <meta
+            name="og:type"
+            content="article"
+        />
+        <meta
+            name="og:article:published_time"
+            content={published.toISOString()}
+        />
+        <meta
+            name="og:article:author"
+            content={Astro.site}
+        />
+        <meta
+            name="twitter:card"
+            content="summary"
+        />
+        <meta
+            name="twitter:site"
+            content="@jorqensen"
+        />
+        <meta
+            name="og:url"
+            content={Astro.url}
+        />
+
+        <title>{title} | Mathias Jørgensen</title>
+        <ViewTransitions />
+    </head>
+    <body>
+        <Navigation />
+        <main class="container mx-auto max-w-5xl p-8">
+            <slot />
+        </main>
+        <footer
+            class="container mx-auto max-w-5xl justify-between p-8 text-sm text-neutral-600"
+        >
+            <p>Built with {Astro.generator}</p>
+        </footer>
+    </body>
+</html>

@@ -1,0 +1,44 @@
+---
+import type { GetStaticPaths } from "astro";
+import { getCollection } from "astro:content";
+import ArticleLayout from "~/layouts/ArticleLayout.astro";
+import { formatDateWithOrdinal } from "~/utils";
+export const getStaticPaths = (async () => {
+    const blog = await getCollection("blog");
+
+    return blog.map((post) => ({
+        params: { slug: post.slug },
+        props: { entry: post },
+    }));
+}) satisfies GetStaticPaths;
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+---
+
+<ArticleLayout
+    title={entry.data.title}
+    published={entry.data.date}
+>
+    <header
+        class="mb-8 flex place-items-center space-x-2 text-sm text-neutral-600"
+    >
+        <p>{formatDateWithOrdinal(entry.data.date)}</p>
+        <p>&bullet;</p>
+        <div class="flex space-x-2">
+            {
+                entry.data.tags.map((tag) => (
+                    <a
+                        href={`/tags/${tag}`}
+                        class="transition-colors hover:text-teal-500"
+                    >
+                        #{tag}
+                    </a>
+                ))
+            }
+        </div>
+    </header>
+    <article class="prose prose-app max-w-none">
+        <Content />
+    </article>
+</ArticleLayout>

@@ -1,0 +1,72 @@
+---
+import { Image } from "astro:assets";
+import { getEntry } from "astro:content";
+import SocialLink from "~/components/SocialLink.astro";
+import portrait from "~/images/portrait.jpg";
+import ApplicationLayout from "~/layouts/ApplicationLayout.astro";
+
+const about = await getEntry("authors", "mathias");
+const { Content } = await about.render();
+---
+
+<ApplicationLayout title="Home">
+    <div class="grid grid-cols-1 gap-12 md:grid-cols-2">
+        <section class="text-balance">
+            <header class="mb-8">
+                <h1 class="text-3xl font-semibold tracking-tight">
+                    {about.data.headline}
+                </h1>
+            </header>
+            <article
+                class="space-y-4e prose prose-app flex-col text-base leading-relaxed"
+            >
+                <Content />
+            </article>
+        </section>
+        <aside
+            class="order-first flex place-items-center space-x-8 md:order-last md:flex-col md:place-items-start md:space-x-0"
+        >
+            <Image
+                src={portrait}
+                alt="portrait of mathias"
+                loading="eager"
+                width={600}
+                height={600}
+                class="aspect-square w-60 rotate-2 rounded-2xl object-cover object-[center_20%] md:mb-8 md:w-full"
+            />
+            <ul
+                role="list"
+                class="flex-col space-y-2 text-xs font-medium md:text-sm"
+            >
+                <li>
+                    <SocialLink
+                        icon="mdi:twitter"
+                        url={`https://twitter.com/${about.data.twitter}`}
+                        >@{about.data.twitter}</SocialLink
+                    >
+                </li>
+                <li>
+                    <SocialLink
+                        icon="mdi:github"
+                        url={`https://github.com/${about.data.github}`}
+                        >@{about.data.github}</SocialLink
+                    >
+                </li>
+                <li>
+                    <SocialLink
+                        icon="mdi:linkedin"
+                        url={`https://linkedin.com/in/${about.data.linkedin}`}
+                        >/in/{about.data.linkedin}</SocialLink
+                    >
+                </li>
+                <li>
+                    <SocialLink
+                        icon="mdi:email"
+                        url={`mailto:${about.data.email}`}
+                        >{about.data.email}</SocialLink
+                    >
+                </li>
+            </ul>
+        </aside>
+    </div>
+</ApplicationLayout>

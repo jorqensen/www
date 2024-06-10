@@ -1,0 +1,56 @@
+---
+import type { GetStaticPaths } from "astro";
+import { getCollection } from "astro:content";
+import ApplicationLayout from "~/layouts/ApplicationLayout.astro";
+import { formatDateWithOrdinal } from "~/utils";
+
+export const getStaticPaths = (async () => {
+    const blog = await getCollection("blog");
+
+    const tags = [...new Set(blog.map((post) => post.data.tags).flat())];
+
+    return tags.map((tag) => {
+        const filtered = blog.filter((post) => post.data.tags.includes(tag));
+
+        return {
+            params: { tag },
+            props: { posts: filtered, tag },
+        };
+    });
+}) satisfies GetStaticPaths;
+
+const { tag, posts } = Astro.props;
+---
+
+<ApplicationLayout title={tag}>
+    <main class="grid space-y-8">
+        <h1 class="text-3xl font-semibold tracking-tight">#{tag}</h1>
+        {
+            posts.map((post) => (
+                <div class="flex gap-x-8">
+                    <div class="text-end">
+                        <span class="text-xs text-neutral-400">
+                            {formatDateWithOrdinal(post.data.date)}
+                        </span>
+                    </div>
+
+                    <div class="space-y-3pt-0.5 grow flex-col">
+                        <a
+                            class="flex text-balance text-xl font-semibold transition-all hover:text-teal-500 hover:underline"
+                            href={`/blog/${post.slug}`}
+                        >
+                            {post.data.title}
+                        </a>
+                        <p class="mt-1 text-sm">{post.data.preface}</p>
+                        <a
+                            href={`/blog/${post.slug}`}
+                            class="-ms-1 mt-1 inline-flex items-center gap-x-2 rounded-lg border border-transparent p-1 text-xs text-neutral-400 transition-all hover:text-teal-500"
+                        >
+                            Read More &rarr;
+                        </a>
+                    </div>
+                </div>
+            ))
+        }
+    </main>
+</ApplicationLayout>
