@@ -1,6 +1,8 @@
 ---
-import "@fontsource-variable/inter";
+import "@fontsource-variable/plus-jakarta-sans";
 import { ViewTransitions } from "astro:transitions";
+import Footer from "~/components/Footer.astro";
+import GradientBackgroundWrapper from "~/components/GradientBackgroundWrapper.astro";
 import Navigation from "~/components/Navigation.astro";
 
 interface Props {
@@ -13,7 +15,6 @@ const faviconUrl = new URL("/favicon.ico", Astro.url);
 
 <html
     lang="en"
-    class="min-h-screen bg-neutral-950 bg-paper font-inter text-neutral-300 antialiased"
     transition:animate="fade"
 >
     <head>
@@ -78,15 +79,13 @@ const faviconUrl = new URL("/favicon.ico", Astro.url);
         <title>{title} | Mathias Jørgensen</title>
         <ViewTransitions />
     </head>
-    <body>
-        <Navigation />
-        <main class="container mx-auto max-w-5xl p-8">
-            <slot />
-        </main>
-        <footer
-            class="container mx-auto max-w-5xl justify-between p-8 text-sm text-neutral-600"
-        >
-            <p>Built with {Astro.generator}</p>
-        </footer>
+    <body class="h-screen font-jakarta text-neutral-300 antialiased">
+        <GradientBackgroundWrapper>
+            <Navigation />
+            <main class="container mx-auto max-w-5xl p-8">
+                <slot />
+            </main>
+            <Footer />
+        </GradientBackgroundWrapper>
     </body>
 </html>
