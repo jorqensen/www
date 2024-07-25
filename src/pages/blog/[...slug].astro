@@ -3,6 +3,7 @@ import type { GetStaticPaths } from "astro";
 import { getCollection } from "astro:content";
 import ArticleLayout from "~/layouts/ArticleLayout.astro";
 import { formatDateWithOrdinal } from "~/utils";
+
 export const getStaticPaths = (async () => {
     const blog = await getCollection("blog");
 
@@ -27,7 +28,7 @@ const { Content } = await entry.render();
         <p>&bullet;</p>
         <div class="flex space-x-2">
             {
-                entry.data.tags.map((tag) => (
+                entry.data.tags.map((tag: string) => (
                     <a
                         href={`/tags/${tag}`}
                         class="transition-colors hover:text-teal-500"
