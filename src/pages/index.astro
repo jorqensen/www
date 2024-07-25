@@ -18,13 +18,13 @@ const { Content } = await about.render();
                 </h1>
             </header>
             <article
-                class="space-y-4e prose prose-app flex-col text-sm font-medium leading-loose"
+                class="space-y-4e prose prose-app flex-col text-sm leading-loose"
             >
                 <Content />
             </article>
         </section>
         <aside
-            class="order-first flex place-items-center space-x-8 md:order-last md:flex-col md:place-items-start md:space-x-0"
+            class="order-first mx-auto flex-col place-items-center md:order-last md:place-items-start md:space-x-0"
         >
             <Image
                 src={portrait}
@@ -32,39 +32,39 @@ const { Content } = await about.render();
                 loading="eager"
                 width={600}
                 height={600}
-                class="aspect-square w-60 rotate-2 rounded-2xl object-cover object-[center_20%] md:mb-8 md:w-full"
+                class="mb-8 aspect-square w-60 rotate-2 rounded-2xl object-cover object-[center_20%] md:w-full"
             />
             <ul
                 role="list"
-                class="flex-col space-y-2 text-xs font-medium md:text-sm"
+                class="flex justify-center space-x-3"
             >
                 <li>
                     <SocialLink
                         icon="mdi:twitter"
+                        aria={about.data.twitter}
                         url={`https://twitter.com/${about.data.twitter}`}
-                        >@{about.data.twitter}</SocialLink
-                    >
+                    />
                 </li>
                 <li>
                     <SocialLink
                         icon="mdi:github"
+                        aria={about.data.github}
                         url={`https://github.com/${about.data.github}`}
-                        >@{about.data.github}</SocialLink
-                    >
+                    />
                 </li>
                 <li>
                     <SocialLink
                         icon="mdi:linkedin"
+                        aria={about.data.linkedin}
                         url={`https://linkedin.com/in/${about.data.linkedin}`}
-                        >/in/{about.data.linkedin}</SocialLink
-                    >
+                    />
                 </li>
                 <li>
                     <SocialLink
-                        icon="mdi:email"
+                        icon="mdi:at"
+                        aria={about.data.email}
                         url={`mailto:${about.data.email}`}
-                        >{about.data.email}</SocialLink
-                    >
+                    />
                 </li>
             </ul>
         </aside>

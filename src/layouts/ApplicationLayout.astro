@@ -1,5 +1,5 @@
 ---
-import "@fontsource-variable/plus-jakarta-sans";
+import "@fontsource-variable/inter";
 import { ViewTransitions } from "astro:transitions";
 import Footer from "~/components/Footer.astro";
 import GradientBackgroundWrapper from "~/components/GradientBackgroundWrapper.astro";
@@ -15,7 +15,7 @@ const faviconUrl = new URL("/favicon.ico", Astro.url);
 
 <html
     lang="en"
-    transition:animate="fade"
+    transition:animate="none"
 >
     <head>
         <meta charset="utf-8" />
@@ -80,11 +80,14 @@ const faviconUrl = new URL("/favicon.ico", Astro.url);
         <ViewTransitions />
     </head>
     <body
-        class="h-screen bg-neutral-950 font-jakarta text-neutral-300 antialiased"
+        class="h-screen bg-neutral-950 font-inter text-neutral-300 antialiased"
     >
         <GradientBackgroundWrapper>
             <Navigation />
-            <main class="container mx-auto max-w-5xl p-8">
+            <main
+                class="container mx-auto max-w-5xl p-8"
+                transition:animate="fade"
+            >
                 <slot />
             </main>
             <Footer />

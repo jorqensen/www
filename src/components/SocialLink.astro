@@ -4,20 +4,19 @@ import { Icon } from "astro-icon/components";
 interface Props {
     icon: string;
     url: string;
+    aria: string;
 }
 
-const { icon, url } = Astro.props;
+const { icon, url, aria } = Astro.props;
 ---
 
 <a
     href={url}
     class="flex place-items-center transition-colors hover:text-teal-500"
+    aria-label={aria}
 >
     <Icon
         name={icon}
-        class="h-6 w-6"
+        class="h-8 w-8"
     />
-    <span class="ml-4">
-        <slot />
-    </span>
 </a>
